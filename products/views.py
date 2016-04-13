@@ -1,4 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.template import loader
 from django.shortcuts import (
     render, 
@@ -21,7 +23,8 @@ class ProductList(ListView):
 
 class ProductDetail(DetailView):
 	model = Product
-			
+	
+@method_decorator(login_required,name='dispatch')	
 class ProductCreate(CreateView):
 	model = Product
 	fields = ['name','description','category','price','image',]

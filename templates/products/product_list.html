@@ -4,19 +4,18 @@
 	
 	{% load staticfiles %}
 	<meta charset="UTF-8">
-	<title>Products</title>
+	<title>Productos</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
 </head>
 <body>
 	<h1 style="color:red">
-		Hola
 		{% if user.is_authenticated %}
-            <h3>{{ user.username }} | <a href="{% url "products:logout" %}">Logout</a></h3>
+            <h3>{{ user.username }} | <a href="{% url "products:logout" %}">Salir</a></h3>
         {% else %}
-            <a href="{% url "products:authentication" %}">login</a>
+            <a href="{% url "products:authentication" %}">Ingresar</a>
         {% endif %}
 	</h1>
-	<a href="{% url "products:create" %}"> New product</a>
+	<a href="{% url "products:create" %}"> Nuevo Producto</a>
 	<ul>
 		{% for pr in object_list %}
 			<li>

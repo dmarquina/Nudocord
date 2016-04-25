@@ -1,22 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	
-	{% load staticfiles %}
-	<meta charset="UTF-8">
-	<title>Products</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
-</head>
-<body>
-	<h1 style="color:red">
-		Hola
-		{% if user.is_authenticated %}
-            <h3>{{ user.username }} | <a href="{% url "products:logout" %}">Logout</a></h3>
-        {% else %}
-            <a href="{% url "products:authentication" %}">login</a>
-        {% endif %}
-	</h1>
-	<a href="{% url "products:create" %}"> New product</a>
+{% extends "base.html" %}
+
+{% block page_title %}
+	Productos
+{% endblock %}
+
+{% block content %}
+	<div class="row column text-center">
+		<h2>Nuestros Nuevos Productos</h2>
+		<hr>
+	</div>
+	<div class="row small-up-1 large-up-4 text-center">
+		{% for pr in object_list %}
+		<div class="column">
+			<img class="thumbnail" src="{{ pr.image.url }}">
+			<a href="{% url "products:detail"  pr.id %}">
+				<h5>{{ pr.name }} </h5></a>
+			<a href="#" class="hollow secondary button expanded">S/.{{ pr.price }}</a>
+		</div>
+		{% endfor %}
+	</div>
+
+<!--	<a href="{% url "products:create" %}"> Nuevo Producto</a>
 	<ul>
 		{% for pr in object_list %}
 			<li>
@@ -28,6 +32,5 @@
 				
 			</li>
 		{% endfor %}
-	</ul>
-</body>
-</html>
+	</ul>-->
+{% endblock  %}

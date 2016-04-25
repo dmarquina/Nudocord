@@ -1,18 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	{% load staticfiles %}
-	<meta charset="UTF-8">
-	<title>{{ product.name}}</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
-</head>
-<body>
-	<h1>{{ product.name }}</h1>
-	<h2>{{ product.description }}</h2>
+{% extends "base.html" %}
 
-	<p>{{ product.category }} | 
-		{{ product.price }}
-	</p>
-	<img src="{{ product.image.url }}">
-</body>
-</html>
+{% block page_title %}
+	{{product.name}}
+{% endblock %}
+{% block content %}
+	<div class="row">
+		<div class="medium-6 columns">
+			<h1>{{ product.name }}</h1>
+			<h2>{{ product.description }}</h2>
+
+			<p>{{ product.category }} | 
+				{{ product.price }}
+			</p>
+			<img src="{{ product.image.url }}">	
+		</div>
+	</div>
+
+	
+{% endblock %}

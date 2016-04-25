@@ -1,16 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>Nuevo producto</title>
-</head>
-<body>
-	<h1>Nuevo producto</h1>
+{% extends "base.html" %}
 
-	<form method="POST" enctype="multipart/form-data">
-		{% csrf_token %}
-		{{ form.as_p }}
-		<button type="submit">Guardar</button>
-	</form>
-</body>
-</html>
+{% block page_title %}
+	Nuevo Producto
+{% endblock  %}
+
+{% block content %}
+	<div class="row">
+		<div class="medium-6 columns">
+		<h1>Nuevo producto</h1>
+		<form method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button class="success button " type="submit">Guardar</button>
+		</form>
+		</div>
+	</div>
+{% endblock  %}

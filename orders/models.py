@@ -1,6 +1,7 @@
 from django.db import models
 from clients.models import Client
 from events.models import Event
+from products.models import Product
 
 class Order(models.Model):
 	STATES_CHOICES = (
@@ -20,3 +21,16 @@ class Order(models.Model):
 	class Meta:
 		ordering = ('id',)
 
+
+
+class Ordersdetail(models.Model):
+	quantity = models.IntegerField(verbose_name='cantidad')
+	subtotal_price = models.DecimalField(max_digits=6, decimal_places=2,verbose_name='subtotal');
+	order = models.ForeignKey(Order,verbose_name='pedido')
+	product = models.ForeignKey(Product,verbose_name='producto')
+
+	def __str__(self):
+		return '%s' % (self.product.name)
+
+	class Meta:
+		ordering = ('id',)

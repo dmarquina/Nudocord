@@ -12,7 +12,8 @@ class Product(models.Model):
 	category = models.CharField(max_length=255,verbose_name='categoria',choices=CATEGORY_CHOICES)
 	price = models.DecimalField(max_digits=6, decimal_places=2, verbose_name='precio')
 	image = models.ImageField(blank=True, verbose_name='imagen')
-	
+	stock = models.IntegerField(default=0)
+
 	def __str__(self):
 		return self.name
 

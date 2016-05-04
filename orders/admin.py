@@ -4,8 +4,8 @@ from .models import Ordersdetail
 
 @admin.register(Order)
 class AdminOrder(admin.ModelAdmin):
-	list_display = ('client','total_price')
+	list_display = ('client','amount')
 
 @admin.register(Ordersdetail)
 class AdminOrdersdetail(admin.ModelAdmin):
-    list_display = ('product', 'quantity','subtotal_price',)
+    list_display = ('product', 'quantity','subtotal_amount',)

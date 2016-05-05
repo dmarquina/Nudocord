@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+	Nudocord
+{% endblock  %}
+
+{% block content %}
+<div class="row">	
+	<div class="medium-6 columns">
+		<h1>Ingreso</h1>
+		<form action="" method="post">
+		{% csrf_token %}
+		<input type="hidden" name="action" value="signin"></input>
+		<input type="text" name="email"></input>
+		<input type="text" name="password"></input>
+		<button type="submit" class="success expanded button">Ingresar</button>
+		</form>
+	</div>	
+</div>	
+{% endblock  %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Favorite
+from .models import Product
 
 #admin.site.register(Product)
 
@@ -8,7 +8,7 @@ class AdminProduct(admin.ModelAdmin):
 	list_display = ('name','category','description','price','image')
 	list_filter = ('category',)
 
-@admin.register(Favorite)
-class AdminFavorite(admin.ModelAdmin):
-	list_display = ('user', 'product',)
-	list_filter = ('user', 'product',)
+#@admin.register(Favorite)
+#class AdminFavorite(admin.ModelAdmin):
+#	list_display = ('user', 'product',)
+#	list_filter = ('user', 'product',)

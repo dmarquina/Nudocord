@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
 </head>
 <body>
-	<div class="top-bar">
+	<div class="top-bar ">
 		<div class="top-bar-left">
 			<ul class="menu">
 				<li class="menu-text">Nudocord</li>
@@ -19,12 +19,13 @@
 				<li><a href="#">Two</a></li>
 			</ul>
 		</div>
-		<div class="top-bar-right">
+		<div class="top-bar-right  ">
 			<ul class="menu">
 				{% if user.is_authenticated %}
-            		<h3>{{ user.username }} | <a href="{% url "products:logout" %}"><button class="alert button">Salir</button></a></h3>
+            		<h3>{{ user.name }} | <a href="{% url "clients:logout" %}"><button class="alert button">Salir</button></a></h3>
         		{% else %}
-            		<a href="{% url "products:authentication" %}"><button class="success button">Ingresar</button></a>
+            		<a href="{% url "clients:signin" %}"><button class="success button">  Ingresar  </button></a>
+            		<a href="{% url "clients:signup" %}"><button class="primary button">Registrarse</button></a>
         		{% endif %}
 			</ul>
 		</div>
@@ -32,5 +33,6 @@
 
 	{% block content %}
 	{% endblock %}
+
 </body>
 </html>

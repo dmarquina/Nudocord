@@ -33,6 +33,9 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'products.apps.ProductsConfig',
     'clients.apps.ClientsConfig',
+    'orders.apps.OrdersConfig',
+    'events.apps.EventsConfig',
+    'carts.apps.CartsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -108,6 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'clients.Client'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/

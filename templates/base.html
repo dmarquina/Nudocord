@@ -18,17 +18,17 @@
 				<li><a href="#">One</a></li>
 				<li><a href="#">Two</a></li>
 			</ul>
-		</div>
-		<div class="top-bar-right  ">
+		</div>	
+		<div class="top-bar-right">
 			<ul class="menu">
 				{% if user.is_authenticated %}
-            		<h3>{{ user.name }} | <a href="{% url "clients:logout" %}"><button class="alert button">Salir</button></a></h3>
-        		{% else %}
-            		<a href="{% url "clients:signin" %}"><button class="success button">  Ingresar  </button></a>
-            		<a href="{% url "clients:signup" %}"><button class="primary button">Registrarse</button></a>
-        		{% endif %}
+	        		<li><h4>{{ user.name }} | </h4>	<a href="{% url "clients:logout" %}"><button class="small expanded alert hollow button">Salir</button></a></li>
+	    		{% else %}
+	        		<li><a href="{% url "clients:signin" %}"><button class="success button ">  Ingresar  </button></a></li>
+	        		<li><a href="{% url "clients:signup" %}"><button class="hollow secondary button">Registrarse</button></a></li>
+	    		{% endif %}
 			</ul>
-		</div>
+		</div>		
 	</div>
 
 	{% block content %}

@@ -6,13 +6,13 @@
 
 {% block content %}
 <div class="row">	
-	<div class="medium-6 columns">
-		<h1>Ingreso</h1>
+	<div class="small-4 large-offset-4 columns">
+		<h1>Ingresar</h1>
 		<form action="" method="post">
 		{% csrf_token %}
 		<input type="hidden" name="action" value="signin"></input>
-		<input type="text" name="email"></input>
-		<input type="text" name="password"></input>
+		<input type="text" name="email" placeholder="E-mail"></input>
+		<input type="text" name="password" placeholder="Password"></input>
 		<button type="submit" class="success expanded button">Ingresar</button>
 		</form>
 	</div>	

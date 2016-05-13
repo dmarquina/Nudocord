@@ -6,32 +6,55 @@
 
 {% block content %}
 
-	<div class="row column text-center">
-		<h2>Nuevos Productos</h2>
-		<hr>
+<div class="main">
+	<div id="mi-slider" class="mi-slider">
+		<ul>
+			<li><a href="#"><img src="../media/gauchoceleste_Q6kHnbL.jpg" alt="gaucho celeste"></a></li>
+			<li><a href="#"><img src="../media/gauchoamarilloneon_zcHsHmv.jpg" alt="gaucho amarillo neon"></a></li>
+			<li><a href="#"><img src="../media/gauchoazul_zXeELaC.jpg" alt="gaucho azul"></a></li>
+			<li><a href="#"><img src="../media/gauchoazul_zXeELaC.jpg" alt="gaucho azul"></a></li>
+		</ul>
+		<ul>
+			<li><a href="#"><img src="../media/gauchoceleste_Q6kHnbL.jpg" alt="gaucho celeste"></a></li>
+			<li><a href="#"><img src="../media/gauchoamarilloneon_zcHsHmv.jpg" alt="gaucho amarillo neon"></a></li>
+			<li><a href="#"><img src="../media/gauchoazul_zXeELaC.jpg" alt="gaucho azul"></a></li>
+			<li><a href="#"><img src="../media/gauchoazul_zXeELaC.jpg" alt="gaucho azul"></a></li>
+		</ul>
+		<ul>
+			<li><a href="#"><img src="../media/gauchoamarilloneon_zcHsHmv.jpg" alt="gaucho amarillo neon"></a></li>
+			<li><a href="#"><img src="../media/gauchoceleste_Q6kHnbL.jpg" alt="gaucho celeste"></a></li>
+			<li><a href="#"><img src="../media/gauchoamarilloneon_zcHsHmv.jpg" alt="gaucho amarillo neon"></a></li>
+		</ul>
+		<ul>
+			<li><a href="#"><img src="../media/gauchoceleste_Q6kHnbL.jpg" alt="gaucho celeste"></a></li>
+			<li><a href="#"><img src="../media/gauchoceleste_Q6kHnbL.jpg" alt="gaucho celeste"></a></li>
+			<li><a href="#"><img src="../media/gauchoamarilloneon_zcHsHmv.jpg" alt="gaucho amarillo neon"></a></li>
+			<li><a href="#"><img src="../media/gauchoceleste_Q6kHnbL.jpg" alt="gaucho celeste"></a></li>
+		</ul>
+		<nav>
+			<a href="#">Simple 1</a>
+			<a href="#">Simple 2</a>
+			<a href="#">Doble 2</a>
+			<a href="#">Doble 3</a>
+		</nav>
 	</div>
-	<div class="row small-up-1 large-up-4 text-center">
+</div>
+<hr>
+
+	<div class="row column text-center">
+		<h2>Nuevos Nudos</h2>
+	</div>
+	<div class="row small-up-2 medium-up-3 large-up-5">
 		{% for pr in object_list %}
 		<div class="column">
 			<img class="thumbnail" src="{{ pr.image.url }}">
 			<a href="{% url "products:detail"  pr.id %}">
-				<h5>{{ pr.name }} </h5></a>
+				<p>{{ pr.name }} </p></a>
 			<a href="#" class="hollow secondary button expanded">S/.{{ pr.price }}</a>
 		</div>
 		{% endfor %}
 	</div>
 
 	<a href="{% url "products:create" %}"> Nuevo Producto</a>
-<!--	<ul>
-		{% for pr in object_list %}
-			<li>
-			<a href="{% url "products:detail"  pr.id %}">
-				{{ pr.name }} |
-			</a>
-				{{ pr.description }} 
-			<img src="{{ pr.image.url }}">
-				
-			</li>
-		{% endfor %}
-	</ul>-->
+
 {% endblock  %}

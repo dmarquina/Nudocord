@@ -21,7 +21,7 @@ from django.contrib.auth.models import (
 
 
 class ClientManager(BaseUserManager):
-    def create_user(self, email, name, password=None):
+    def create_user(self, email, name,lastname, password=None):
         """
         Creates and saves a User with the given email,name 
         and password.
@@ -32,20 +32,22 @@ class ClientManager(BaseUserManager):
         user = self.model(
             email=self.normalize_email(email),
             name=name,
+            lastname=lastname,
         )
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, name, password):
+    def create_superuser(self, email, name,lastname, password):
         """
         Creates and saves a superuser with the given email, name
         and password.
         """
         user = self.create_user(email,
             password=password,
-            name=name
+            name=name,
+            lastname=lastname,
         )
         user.is_admin = True
         user.save(using=self._db)
@@ -59,13 +61,14 @@ class Client(AbstractBaseUser):
         unique=True,
     )
     name = models.CharField(max_length=255)
+    lastname = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
     objects = ClientManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name']
+    REQUIRED_FIELDS = ['name','lastname']
 
     def get_full_name(self):
         # The user is identified by their email address

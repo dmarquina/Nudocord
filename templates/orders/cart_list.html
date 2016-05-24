@@ -6,10 +6,12 @@
 
 {% block content %}
 
-<h2>HOLI</h2>
-{% for pr in products_cart %}
-	<img class="thumbnail" src="{{ pr.image.url }}">
-	<p>{{ pr.name }} </p>
-	<p>S/.{{ pr.price }} </p></a>
+<h2>Carrito</h2>
+{% for cart in cart %}
+	<img class="thumbnail" src="{{ cart.product.image.url }}">
+	<p>{{ cart.productname }} </p>
+	<p>S/.{{ cart.product.price }} </p></a>
+	<p>Cantidad: {{cart.quantity}}</p>
+	<p>Subtotal: {{cart.subtotal_amount}}</p>
 {% endfor %}
 {% endblock %}

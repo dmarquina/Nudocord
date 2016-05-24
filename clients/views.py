@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from .models import Client
-from .admin import UserCreationForm
+from userprofiles.models import Userprofile
 from django import forms
 
 def signin(request):
@@ -22,17 +22,19 @@ def signin(request):
                 user = authenticate(email=email, password=password)
                 login(request, user)
                 return redirect('/')
-            
+
             elif action == 'signup':
-	            if password and password2 and password != password2:
-		            raise forms.ValidationError("Passwords don't match")
-	            else:
-	            	client = Client.objects.create_user(email=email,
-					                                	name=name,
-	            										lastname=lastname,
-	            										password=password,)
-	            	client.save()
-	            	return redirect('/signin')
+                if password and password2 and password != password2:
+                    raise forms.ValidationError("Passwords don't match")
+                else:
+                    userprofile=Userprofile.objects.create_user(email=email,
+                                                                name=name,
+                                                                lastname=lastname,
+                                                                password=password,)
+                    client = Client.objects.create_client(userprofile)
+                    userprofile.save()
+                    client.save()
+                    return redirect('/signin')
+
     context = {}
     return render(request, 'signin/signin.html', context)
- 

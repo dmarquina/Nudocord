@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from django.http import HttpResponse
 from products.models import Product
+from .models import Cart
 
 def addtocart(request,pk):
 	cart_quantity = request.session.get('cart_quantity')
@@ -17,10 +18,12 @@ def addtocart(request,pk):
 def cartdetail(request):
 	cart_quantity = request.session.get('cart_quantity')
 	pk_products_cart = request.session.get('pk_products_cart')
-	products_cart=[]
-	for pk_product in pk_products_cart:
-		products_cart.append(get_object_or_404(Product, pk=int(pk_product)))
+	cart=[]
+	for pk_product , quantity in pk_products_cart.items():
+		product = get_object_or_404(Product, pk=int(pk_product))
+		subtotal_amount = product.price * quantity
+		cart.append(Cart.objects.create_cart(quantity,subtotal_amount,product))
 	return render(request, 'orders/cart_list.html',{
-		'products_cart': products_cart,
+		'cart': cart,
 		'cart_quantity': cart_quantity,
 		})

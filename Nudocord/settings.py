@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'deliverplaces.apps.DeliverplacesConfig',
     'carts.apps.CartsConfig',
+    'userprofiles.apps.UserprofilesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -111,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'clients.Client'
+AUTH_USER_MODEL = 'userprofiles.Userprofile'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/

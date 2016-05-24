@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 	{% load staticfiles %}
 	<meta charset="utf-8">
@@ -7,32 +7,50 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{% block page_title %}
 	{% endblock %}</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/foundation.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'foundation-icons/foundation-icons.css' %}">
+	<link href='https://fonts.googleapis.com/css?family=Cabin+Sketch:700' rel='stylesheet' type='text/css'>
+	<script src="{% static 'js/modernizr.custom.63321.js' %}"></script>
 </head>
 <body>
 	<div class="top-bar ">
-		<div class="top-bar-left">
-			<ul class="menu">
-				<li class="menu-text">Nudocord</li>
-				<li><a href="#">One</a></li>
-				<li><a href="#">Two</a></li>
-			</ul>
-		</div>
-		<div class="top-bar-right  ">
-			<ul class="menu">
-				{% if user.is_authenticated %}
-            		<h3>{{ user.name }} | <a href="{% url "clients:logout" %}"><button class="alert button">Salir</button></a></h3>
-        		{% else %}
-            		<a href="{% url "clients:signin" %}"><button class="success button">  Ingresar  </button></a>
-            		<a href="{% url "clients:signup" %}"><button class="primary button">Registrarse</button></a>
-        		{% endif %}
-			</ul>
-		</div>
+		<div class="top-bar-title">
+				<a href="#"class="menu-text nudocord-logo">Nudocord</a>
+			</div>	
+		<div class="top-bar-right">
+		 <li><a href="{% url "carts:cartdetail" %}" class ="a-contrast">carrito {{cart_quantity}}</a></li>
+		<ul class="dropdown menu" data-dropdown-menu>
+			{% if user.is_authenticated %}
+			<li>
+			    <a href="#" class="a-contrast"><i class="fi-torso"></i><span>{{ user.name }} </span></a>
+			    <ul class="menu">
+			      <li><a href="#" class ="a-contrast">Mi perfil</a></li>
+			      <li><a href="#" class ="a-contrast">Mis pedidos</a></li>
+			      <li><a href="{% url "clients:logout" %}" class ="a-contrast">Salir</a></li>
+			    </ul>
+			 </li>
+    		{% else %}
+        		<li><a class="a-contrast" href="{% url "clients:signin" %}">Iniciar Sesión</a></li>
+    		{% endif %}
+		</ul>
+		</div>		
 	</div>
 
-	{% block content %}
-	{% endblock %}
+	<section class="body-container">
+		{% block content %}
+		{% endblock %}
+	</section>
+	<script src="{% static 'js/vendor/jquery.js' %}"></script>
+	<script src="{% static 'js/jquery.catslider.js' %}"></script>
+	<script src="{% static 'js/vendor/foundation.js' %}"></script>
+	<script src="{% static 'js/app.js' %}"></script>
+	<script>
+			$(function() {
 
+				$( '#mi-slider' ).catslider();
+
+			});
+		</script>
 </body>
+
 </html>

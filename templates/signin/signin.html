@@ -5,16 +5,42 @@
 {% endblock  %}
 
 {% block content %}
-<div class="row">	
-	<div class="medium-6 columns">
-		<h1>Ingreso</h1>
-		<form action="" method="post">
-		{% csrf_token %}
-		<input type="hidden" name="action" value="signin"></input>
-		<input type="text" name="email"></input>
-		<input type="text" name="password"></input>
-		<button type="submit" class="success expanded button">Ingresar</button>
-		</form>
+<article class="page-content">
+	<div class="row">	
+		<div id="signin" class="medium-6 columns">
+			<section>
+				<h4>INICIAR SESIÓN</h4>
+				<form action="" method="post">
+				{% csrf_token %}
+				<input type="hidden" name="action" value="signin"></input>
+				<input type="text" name="email" placeholder="E-mail"></input>
+				<input type="password" name="password" placeholder="Password"></input>
+				<button type="submit" class="success expanded button">INICIAR SESIÓN</button>
+				</form>
+			</section>
+		</div>	
+		<div id="signup" class="medium-6 columns">
+			<section>
+				<h4>CREA TU CUENTA</h4>
+				<form action="" method="post">
+				{% csrf_token %}
+				<input type="hidden" name="action" value="signup"></input>
+				<div class="row">
+					
+				<div class="medium-6 columns">
+					<input type="text" name="name" placeholder="Nombre"></input>
+				</div>
+				<div class="medium-6 columns">
+					<input type="text" name="lastname" placeholder="Apellido"></input>
+				</div>
+				</div>
+				<input type="text" name="email" placeholder="E-mail"></input>
+				<input type="password" name="password" placeholder="Contraseña"></input>
+				<input type="password" name="password2" placeholder="Confirma tu contraseña"></input>
+				<button type="submit" class="success expanded button">CREAR CUENTA</button>
+				</form>
+			</section>
+		</div>	
 	</div>	
-</div>	
+</article>
 {% endblock  %}

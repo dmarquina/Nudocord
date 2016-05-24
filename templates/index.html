@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block page_title %}
-	Productos
+	Inicio
 {% endblock %}
 
 {% block content %}
@@ -45,16 +45,14 @@
 		<h2>Nuevos Nudos</h2>
 	</div>
 	<div class="row small-up-2 medium-up-3 large-up-5">
-		{% for pr in object_list %}
+		{% for pr in product_list %}
 		<div class="column">
 			<img class="thumbnail" src="{{ pr.image.url }}">
-			<a href="{% url "products:detail"  pr.id %}">
-				<p>{{ pr.name }} </p></a>
-			<a href="#" class="hollow secondary button expanded">S/.{{ pr.price }}</a>
+			<a href="{% url "products:detail"  pr.id %}">	
+				<p>{{ pr.name }} </p>
+				<p>S/.{{ pr.price }} </p></a>
+				<a href="{% url "carts:addtocart" pr.id %}" class="success button expanded">Añadir a Carrito</a>
 		</div>
 		{% endfor %}
 	</div>
-
-	<a href="{% url "products:create" %}"> Nuevo Producto</a>
-
 {% endblock  %}

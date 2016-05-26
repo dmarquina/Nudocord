@@ -6,12 +6,52 @@
 
 {% block content %}
 
-<h2>Carrito</h2>
-{% for cart in cart %}
-	<img class="thumbnail" src="{{ cart.product.image.url }}">
-	<p>{{ cart.productname }} </p>
-	<p>S/.{{ cart.product.price }} </p></a>
-	<p>Cantidad: {{cart.quantity}}</p>
-	<p>Subtotal: {{cart.subtotal_amount}}</p>
-{% endfor %}
+<br></br>
+<div class="row ">
+	<div class="medium-8 columns">
+		
+		<div class="row">
+			<div class="medium-6 columns">
+				Productos	
+			</div>
+			<div class="medium-2 columns">
+				Precio	
+			</div>
+			<div class="medium-2 columns">
+				Cantidad
+			</div>
+			<div class="medium-2 columns end">
+				Subtotal
+			</div>
+		<hr>
+		</div>
+
+
+		{% for cart in cart %}
+		<div class="row ">
+			<div class="medium-2 columns ">
+				<img src="{{ cart.product.image.url }}">
+			</div>
+			<div class="medium-4 columns">
+				<strong>{{ cart.product.name }}</strong>
+			</div>
+			<div class="medium-2 columns">
+				<p>S/.{{ cart.product.price }} </p>
+			</div>
+			<div class="medium-2 columns">
+				<p>{{cart.quantity}}</p>
+			</div>
+			<div class="medium-2 columns end">
+				<p>{{cart.subtotal_amount}}</p>
+			</div>
+			<br></br>
+			<br></br>
+		<hr>
+		</div>
+		{% endfor %}
+	</div>
+	<div class="medium-4 columns">
+		<button class="success expanded button " type="submit">COMPRAR AHORA</button>
+	</div>
+</div>
 {% endblock %}

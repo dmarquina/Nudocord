@@ -27,31 +27,103 @@
 		</div>
 
 
-		{% for cart in cart %}
+		{% for c in cart %}
 		<div class="row ">
 			<div class="medium-2 columns ">
-				<img src="{{ cart.product.image.url }}">
+				<img src="{{ c.product.image.url }}">
 			</div>
 			<div class="medium-4 columns">
-				<strong>{{ cart.product.name }}</strong>
+				<strong>{{ c.product.name }}</strong>
 			</div>
 			<div class="medium-2 columns">
-				<p>S/.{{ cart.product.price }} </p>
+				<p>S/.{{ c.product.price }} </p>
 			</div>
 			<div class="medium-2 columns">
-				<p>{{cart.quantity}}</p>
+				<p>{{c.quantity}}</p>
 			</div>
 			<div class="medium-2 columns end">
-				<p>{{cart.subtotal_amount}}</p>
+				<p>{{c.subtotal_amount}}</p>
 			</div>
 			<br></br>
 			<br></br>
 		<hr>
 		</div>
+		{% empty %}
+		<p>No hay productos en el carrito</p>
 		{% endfor %}
 	</div>
 	<div class="medium-4 columns">
-		<button class="success expanded button " type="submit">COMPRAR AHORA</button>
+		<form action="makeorder" method="get">
+			<label>Lugar:
+				<div class="combo">
+					<select class="combo_deliverplacename" id="combo_deliverplacename" name="deliverplacename">
+						<option value="" selected="selected">Lugar</option>
+					</select>
+				</div>
+			</label>
+			<label>Fecha y Hora:
+				<div class="combo">
+					<select class="combo_deliverplacedate" id="combo_deliverplacedate" name="deliverplacedate">
+						<option value="" selected="selected">Fecha y Hora</option>
+					</select>
+				</div>
+			</label>
+				{% if cart %}
+					<button class="success expanded button "  type="submit">COMPRAR AHORA</button>
+				{% else %}
+					<button class="disabled expanded button " disabled="true" type="submit">COMPRAR AHORA</button>
+				{% endif %}
+		</form>
 	</div>
 </div>
+<script type="text/javascript">
+	actualizar_combo_deliverplacename();
+	function actualizar_combo_deliverplacename() {
+		$.getJSON('/api/deliverplacesname/', function(data) {
+            $.each(data, function(index, deliverplacename){
+            $('<option value="' + deliverplacename['id'] + '">' +
+            deliverplacename['name'] + '</option>').appendTo('.combo_deliverplacename');
+        });
+        });
+    }
+	
+    $('.combo').on('change', '.combo_deliverplacename', function() {
+        var deliverplace_id = $(this).val();
+        if(deliverplace_id) {
+            actualizar_deliverplacedate(deliverplace_id);
+        } else {
+            clean_combo_deliverplacedate();
+        }
+    });
+
+    function clean_combo_deliverplacedate() {
+        $('.combo_deliverplacedate').empty();
+        $('<option value="">Fecha y Hora </option>').appendTo('.combo_deliverplacedate');
+    }
+
+    function actualizar_combo_deliverplacedate(data) {
+        clean_combo_deliverplacedate();
+        $.each(data, function(index, deliverplacedate){
+        	//Convertir a date la fecha serializada
+        	var date = new Date( Date.parse( deliverplacedate['date']) );
+        	timeString = ('0' + date.getHours()).slice(-2) + ':'
+             + ('0' + (date.getMinutes())).slice(-2)
+
+        	dateString = ('0' + date.getDate()).slice(-2) + '/'
+             + ('0' + (date.getMonth()+1)).slice(-2) + '/'
+             + date.getFullYear();
+            $('<option value="' + deliverplacedate['id'] + '"> ' +
+             dateString + ' - ' + timeString +
+             '</option>').appendTo('.combo_deliverplacedate');
+        });
+
+    }
+
+    function actualizar_deliverplacedate(deliverplace_id) {
+        $.getJSON('/api/deliverplacesdate/' + deliverplace_id, function(data) {
+            actualizar_combo_deliverplacedate(data);
+        });
+    }
+
+</script>
 {% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+	Pedidos
+{% endblock  %}
+
+{% block content %}
+	<div class="row">
+		<div class="medium-6 columns">
+		<h1>Pedidos</h1>
+		<form method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button class="success button " type="submit">Guardar</button>
+		</form>
+		</div>
+	</div>
+{% endblock  %}

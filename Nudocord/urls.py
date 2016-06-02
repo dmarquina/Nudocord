@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^', include('products.urls',namespace='products')),
     url(r'^', include('clients.urls',namespace='clients')),
     url(r'^', include('carts.urls',namespace='carts')),
+    url(r'^', include('orders.urls',namespace='orders')),
 ] +static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from products.models import Product
 from .models import Cart
 from clients.models import Client
+from deliverplaces.models import Deliverplace
 
 def addtocart(request,pk):
 	if request.user.is_authenticated():
@@ -32,6 +33,13 @@ def addtocart(request,pk):
 
 def cartdetail(request):
 	cart=[]
+	"""
+	deliverplaces = Deliverplace.objects.all()
+	placesname = []
+	for dp in deliverplaces:
+		if not dp.name in placesname:
+			placesname.append(dp.name)
+	"""
 	if request.user.is_authenticated():
 		client = Client.objects.get(userprofile=request.user)
 		cart = Cart.objects.filter(client=client)
@@ -49,5 +57,8 @@ def cartdetail(request):
 							product=product))
 	return render(request, 'orders/cart_list.html',{
 		'cart': cart,
-		'cart_quantity': cart_quantity,}
+		'cart_quantity': cart_quantity,
+		#'deliverplaces': deliverplaces,
+		#'placesname': placesname,
+		}
 		)

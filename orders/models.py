@@ -14,7 +14,6 @@ class Order(models.Model):
 	registration_date = models.DateField(auto_now=False, auto_now_add=True, verbose_name='fecha de registro',blank=True)	
 	client = models.ForeignKey(Client, verbose_name='cliente')
 	deliverplace = models.ForeignKey(Deliverplace, verbose_name='lugar de entrega')
-	deliver_date = models.DateField(auto_now=False, auto_now_add=False, verbose_name='fecha de entrega')
 
 	def __str__(self):
 		return '%s' % (self.client.name)

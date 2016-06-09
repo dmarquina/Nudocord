@@ -5,7 +5,7 @@ from products.models import Product
 
 class Order(models.Model):
 	STATES_CHOICES = (
-		('PR', 'Proceso'),
+		('PR', 'En Proceso'),
 		('EN', 'Entregado'),
 		('CA', 'Cancelado'),
 	)
@@ -16,7 +16,7 @@ class Order(models.Model):
 	deliverplace = models.ForeignKey(Deliverplace, verbose_name='lugar de entrega')
 
 	def __str__(self):
-		return '%s' % (self.client.name)
+		return '%s' % (self.client.userprofile.name)
 
 	class Meta:
 		ordering = ('id',)

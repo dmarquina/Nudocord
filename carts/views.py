@@ -33,13 +33,6 @@ def addtocart(request,pk):
 
 def cartdetail(request):
 	cart=[]
-	"""
-	deliverplaces = Deliverplace.objects.all()
-	placesname = []
-	for dp in deliverplaces:
-		if not dp.name in placesname:
-			placesname.append(dp.name)
-	"""
 	if request.user.is_authenticated():
 		client = Client.objects.get(userprofile=request.user)
 		cart = Cart.objects.filter(client=client)
@@ -58,7 +51,5 @@ def cartdetail(request):
 	return render(request, 'orders/cart_list.html',{
 		'cart': cart,
 		'cart_quantity': cart_quantity,
-		#'deliverplaces': deliverplaces,
-		#'placesname': placesname,
 		}
 		)

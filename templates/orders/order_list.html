@@ -5,14 +5,46 @@
 {% endblock  %}
 
 {% block content %}
-	<div class="row">
-		<div class="medium-6 columns">
-		<h1>Pedidos</h1>
-		<form method="POST" enctype="multipart/form-data">
-			{% csrf_token %}
-			{{ form.as_p }}
-			<button class="success button " type="submit">Guardar</button>
-		</form>
+
+<div class="row ">
+<br>
+	<h4>MIS PEDIDOS</h4>
+</div>
+<hr>
+<section class="row ">
+	
+	{% for o in orderdata%}
+	<div class="row ">
+		<aside class="infopedido medium-3 columns ">
+			<h5>PEDIDO NO. {{ o.id }}</h5>
+			<p>Comprado el {{o.registration_date}}</p>
+			<p>Total S/.{{o.amount}}</p>
+			
+		</aside>
+
+		<article class="medium-5 columns" >
+			<div class="medium-4 columns">
+				<img src="{{o.firstprod.image.url}}">
+			</div>
+			<div class="medium-8 columns productnameorder" >
+				<p>{{o.firstprod.name}}</p>
+			</div>
+			<div class="medium-12 columns">
+				<p>+{{o.aditionalprod}} productos adicionales</p>
+			</div>
+		</article>
+		<div class="medium-4 columns buttondetailorder">
+			<a href="#" class="expanded success button ">VER DETALLES</a>
 		</div>
 	</div>
+		
+		<br></br>
+		<br></br>
+	<hr>
+	</div>
+	{% empty %}
+	<p>No tienes ningun pedido</p>
+	{% endfor %}
+
+</section>
 {% endblock  %}

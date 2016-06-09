@@ -53,7 +53,8 @@
 		{% endfor %}
 	</div>
 	<div class="medium-4 columns">
-		<form action="makeorder" method="get">
+		<form action="{% url "orders:makeorder" %}" method="POST">
+		{% csrf_token %}
 			<label>Lugar:
 				<div class="combo">
 					<select class="combo_deliverplacename" id="combo_deliverplacename" name="deliverplacename">
@@ -69,9 +70,9 @@
 				</div>
 			</label>
 				{% if cart %}
-					<button class="success expanded button "  type="submit">COMPRAR AHORA</button>
+					<button type="submit" class="success expanded button" >COMPRAR AHORA</button>
 				{% else %}
-					<button class="disabled expanded button " disabled="true" type="submit">COMPRAR AHORA</button>
+					<button class="disabled expanded button " disabled="true">COMPRAR AHORA</button>
 				{% endif %}
 		</form>
 	</div>

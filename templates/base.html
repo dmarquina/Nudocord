@@ -26,7 +26,7 @@
 			    <a href="#" class="a-contrast"><i class="fi-torso"></i><span>{{ user.name }} </span></a>
 			    <ul class="menu">
 			      <li><a href="#" class ="a-contrast">Mi perfil</a></li>
-			      <li><a href="#" class ="a-contrast">Mis pedidos</a></li>
+			      <li><a href="{% url "orders:orderlist" %}" class ="a-contrast">Mis pedidos</a></li>
 			      <li><a href="{% url "clients:logout" %}" class ="a-contrast">Salir</a></li>
 			    </ul>
 			 </li>

@@ -8,22 +8,22 @@
 
 <br></br>
 <div class="row ">
-	<div class="medium-8 columns">
+	<div class="medium-8 columns tableorderlist">
 		
 		<div class="row">
-			<div class="medium-6 columns">
-				Productos	
+			<div class="medium-6 columns ">
+				Producto	
 			</div>
-			<div class="medium-2 columns">
+			<div class="medium-2 columns horizontal-center">
 				Precio	
 			</div>
-			<div class="medium-2 columns">
+			<div class="medium-2 columns horizontal-center">
 				Cantidad
 			</div>
-			<div class="medium-2 columns end">
+			<div class="medium-2 columns end horizontal-center">
 				Subtotal
 			</div>
-		<hr>
+		<hr class="hard">
 		</div>
 
 
@@ -32,16 +32,16 @@
 			<div class="medium-2 columns ">
 				<img src="{{ c.product.image.url }}">
 			</div>
-			<div class="medium-4 columns">
-				<strong>{{ c.product.name }}</strong>
+			<div class="medium-4 columns vert-horiz-center">
+				<p>{{ c.product.name }}</p>
 			</div>
-			<div class="medium-2 columns">
+			<div class="medium-2 columns vert-horiz-center">
 				<p>S/.{{ c.product.price }} </p>
 			</div>
-			<div class="medium-2 columns">
+			<div class="medium-2 columns vert-horiz-center">
 				<p>{{c.quantity}}</p>
 			</div>
-			<div class="medium-2 columns end">
+			<div class="medium-2 columns end vert-horiz-center">
 				<p>{{c.subtotal_amount}}</p>
 			</div>
 			<br></br>
@@ -52,7 +52,7 @@
 		<p>No hay productos en el carrito</p>
 		{% endfor %}
 	</div>
-	<div class="medium-4 columns">
+	<div class="medium-4 columns right">
 		<form action="{% url "orders:makeorder" %}" method="POST">
 		{% csrf_token %}
 			<label>Lugar:

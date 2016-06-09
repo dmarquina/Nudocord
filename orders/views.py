@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .models import Order, Ordersdetail
 from clients.models import Client
 from carts.models import Cart
@@ -25,20 +25,39 @@ def makeorder(request):
 										quantity=c.quantity,
 										subtotal_amount=c.subtotal_amount,
 										product=c.product)
-		orders=Order.objects.filter(client=client)
-		context = {'orders' : orders}
-		return render(request,'orders/order_list.html',context)
+		Cart.objects.filter(client=client).delete()
+		return redirect('/')
 	else:	
 		return redirect('/')
 
 def orderlist(request):
 	client = Client.objects.get(userprofile = request.user)
+	context = getorderdata(client)
+	context['cart_quantity'] = getcart(client)
+	return render(request,'orders/order_list.html',context)
+
+def orderdetail(request,pk):
+	client = Client.objects.get(userprofile = request.user)
+	order = get_object_or_404(Order, pk=pk)
+	orderdetail=Ordersdetail.objects.filter(order=order)
+	cantidad = 0
+	for od in orderdetail:
+		cantidad = cantidad + od.quantity
+	context = {'order':order,
+				'orderdetail':orderdetail,
+				'cantidad':cantidad}
+	context['cart_quantity'] = getcart(client)
+	return render(request,'orders/order_list_detail.html',context)
+
+def getorderdata(client):
 	orders=Order.objects.filter(client=client)
 	orderdata=[]
 	for o in orders:
 		orderdetail=Ordersdetail.objects.filter(order=o)
 		aditionalprod=len(orderdetail)-1
-		firstprod=orderdetail[0].product
+		for od in orderdetail:
+			firstprod=od.product
+			break
 		data={ 'id':o.id,
 				'registration_date':o.registration_date,
 				'amount':o.amount,
@@ -46,7 +65,12 @@ def orderlist(request):
 				'aditionalprod':aditionalprod
 			}
 		orderdata.append(data)
-
 	context = {'orderdata' : orderdata}
+	return context
 
-	return render(request,'orders/order_list.html',context)
+def getcart(client):
+	cart = Cart.objects.filter(client=client)
+	cart_quantity=0
+	for c in cart:
+		cart_quantity+=c.quantity
+	return cart_quantity

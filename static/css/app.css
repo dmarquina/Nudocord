@@ -43,18 +43,44 @@ html{
         color: #95a5a6;  
     }
 
-aside.infopedido{
+aside.left{
 	max-height: 75rem;
 	border-right: 1px solid #cacaca; 
 	margin: 1.25rem auto;
-  	clear: both;
 }
 
-.buttondetailorder, .productnameorder{
+aside.right{
+	max-height: 75rem;
+	border-left: 1px solid #cacaca; 
+	margin-left: 1.25rem auto;
+}
+
+div.left{
+	max-height: 75rem;
+	border-right: 1px solid #cacaca; 
+	margin-right: 1.25rem auto;
+}
+
+div.right{
+	max-height: 75rem;
+	border-left: 1px solid #cacaca; 
+	margin-left: 1.25rem auto;
+}
+
+hr.hard{
+	border-bottom: 1px solid #666;
+}
+
+
+.vertical-center,.buttondetailorder, .vert-horiz-center{
+	padding-top: 25px;
+}
+
+.buttondetailorder, .vert-horiz-center,.horizontal-center{
 	text-align: center;
-	padding-top: 20px;
 }
 
-.productnameorder{
-	font-weight: 700;
+.tableorderlist{
+	padding-right: 50px;
+	padding-left: 50px;
 }

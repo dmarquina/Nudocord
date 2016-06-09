@@ -1,27 +1,66 @@
 {% extends "base.html" %}
 
 {% block page_title %}
-	Pedidos
+Detalle de Pedido
 {% endblock  %}
-
 {% block content %}
-
+<br>
 <div class="row">
-	<div class="medium-8 columns">
+	<div class="medium-3 columns">
+		<h4>Resumen de pedido</h4>
+			<p>Nro. pedido: {{order.id}}</p>
+			<p>Cantidad: {{cantidad}}</p>
+			<p>Total: {{order.amount}}</p>
+		<h5>Datos de entrega</h5>
+			<p>Lugar: {{order.deliverplace.name}}</p>
+			<p>Fecha: {{order.deliverplace.date|date:"SHORT_DATE_FORMAT"}}</p>
+			<p>Hora: {{order.deliverplace.date|date:"P"}}</p>
+
+	</div>
+	<div class="right medium-9 columns tableorderlist">
 		
 		<div class="row">
-			<div class="medium-6 columns">
-				Productos	
+			<div class="medium-6 columns ">
+				Producto	
 			</div>
-			<div class="medium-2 columns">
+			<div class="medium-2 columns horizontal-center">
 				Precio	
 			</div>
-			<div class="medium-2 columns">
+			<div class="medium-2 columns horizontal-center">
 				Cantidad
 			</div>
-			<div class="medium-2 columns end">
+			<div class="medium-2 columns end horizontal-center">
 				Subtotal
 			</div>
-		<hr>
+		<hr class="hard">
 		</div>
+
+
+		{% for o in orderdetail %}
+		<div class="row ">
+			<div class="medium-2 columns ">
+				<img src="{{ o.product.image.url }}">
+			</div>
+			<div class="medium-4 columns vert-horiz-center">
+				<p>{{ o.product.name }}</p>
+			</div>
+			<div class="medium-2 columns vert-horiz-center">
+				<p>S/.{{ o.product.price }} </p>
+			</div>
+			<div class="medium-2 columns vert-horiz-center">
+				<p>{{o.quantity}}</p>
+			</div>
+			<div class="medium-2 columns end vert-horiz-center">
+				<p>{{o.subtotal_amount}}</p>
+			</div>
+			<br></br>
+			<br></br>
+		</div>
+		{% if not forloop.last %} 
+			<hr>
+		{% endif %}	
+		{% endfor %}
+	</div>
 </div>
+<hr>
+{% endblock  %}

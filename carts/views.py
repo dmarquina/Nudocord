@@ -33,8 +33,10 @@ def addtocart(request,pk):
 
 def cartdetail(request):
 	cart=[]
+	phone=0
 	if request.user.is_authenticated():
 		client = Client.objects.get(userprofile=request.user)
+		phone = client.phone
 		cart = Cart.objects.filter(client=client)
 		cart_quantity=0
 		for c in cart:
@@ -51,5 +53,6 @@ def cartdetail(request):
 	return render(request, 'orders/cart_list.html',{
 		'cart': cart,
 		'cart_quantity': cart_quantity,
+		'phone': phone,		
 		}
 		)

@@ -12,7 +12,7 @@
 </div>
 <hr>
 <section class="row ">
- 	{% for o in orderdata%}
+ 	{% for o in orderdata|dictsortreversed:"registration_date" %}
 	<div class="row ">
 		<aside class="left medium-3 columns ">
 			<h5>Nro. pedido {{ o.id }}</h5>
@@ -44,7 +44,7 @@
 	{% empty %}
 	<p>No tienes ningun pedido</p>
 	{% endfor %}
-<div class="reveal" id="exampleModal1" data-reveal>
+<!--<div class="reveal" id="exampleModal1" data-reveal>
   <h1>Awesome. I Have It.</h1>
   <p class="lead">Your couch. It is mine.</p>
   <p>I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
@@ -52,6 +52,6 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<p><a data-open="exampleModal1">Click me for a modal</a></p>
+<p><a data-open="exampleModal1">Click me for a modal</a></p>-->
 </section>
 {% endblock  %}

@@ -6,7 +6,7 @@ html{
 }
 
 .body-container{
-	background-color: white;
+	background-color: #F1F2ED;
 }
 
 .page-content{
@@ -41,7 +41,11 @@ html{
     color: #152B39; }
     .a-contrast:hover, .a-contrast:focus {
         color: #95a5a6;  
-    }
+}
+
+section.slider{
+	background-color: #fff;
+}
 
 aside.left{
 	max-height: 75rem;

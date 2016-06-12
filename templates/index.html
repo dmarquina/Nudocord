@@ -32,20 +32,21 @@
 		</nav>
 	</div>
 </section>
-<hr>
-
-	<div class="row column text-center">
-		<h2>Nuevos Nudos</h2>
+<br>
+<div class="row column text-center">
+	<h2>Nuevos Nudos</h2>
+</div>
+<div class="row small-up-2 medium-up-3 large-up-5">
+	{% for pr in product_list %}
+	{% if pr.stock > 0%}
+	<div class="column">
+		<img class="thumbnail" src="{{ pr.image.url }}">
+		<a href="{% url "products:detail"  pr.id %}">	
+			<p>{{ pr.name }} </p>
+			<p>S/.{{ pr.price }} </p></a>
+			<a href="{% url "carts:addtocart" pr.id %}" class="success button expanded">Añadir a Carrito</a>
 	</div>
-	<div class="row small-up-2 medium-up-3 large-up-5">
-		{% for pr in product_list %}
-		<div class="column">
-			<img class="thumbnail" src="{{ pr.image.url }}">
-			<a href="{% url "products:detail"  pr.id %}">	
-				<p>{{ pr.name }} </p>
-				<p>S/.{{ pr.price }} </p></a>
-				<a href="{% url "carts:addtocart" pr.id %}" class="success button expanded">Añadir a Carrito</a>
-		</div>
-		{% endfor %}
-	</div>
+	{% endif %}
+	{% endfor %}
+</div>
 {% endblock  %}

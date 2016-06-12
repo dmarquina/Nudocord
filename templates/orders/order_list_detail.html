@@ -8,14 +8,21 @@ Detalle de Pedido
 <div class="row">
 	<div class="medium-3 columns">
 		<h4>Resumen de pedido</h4>
+		<hr class="hard">
 			<p>Nro. pedido: {{order.id}}</p>
+			<hr>
 			<p>Cantidad: {{cantidad}}</p>
+			<hr>
 			<p>Total: {{order.amount}}</p>
+			<hr>
 		<h5>Datos de entrega</h5>
+		<hr class="hard">
 			<p>Lugar: {{order.deliverplace.name}}</p>
+			<hr>
 			<p>Fecha: {{order.deliverplace.date|date:"SHORT_DATE_FORMAT"}}</p>
+			<hr>
 			<p>Hora: {{order.deliverplace.date|date:"P"}}</p>
-
+			<hr>
 	</div>
 	<div class="right medium-9 columns tableorderlist">
 		

@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from .models import Order, Ordersdetail
 from clients.models import Client
 from carts.models import Cart
+from products.models import Product
 from deliverplaces.models import Deliverplace
 
 def makeorder(request):
@@ -25,6 +26,9 @@ def makeorder(request):
 										quantity=c.quantity,
 										subtotal_amount=c.subtotal_amount,
 										product=c.product)
+			product=get_object_or_404(Product,pk=c.product.id)
+			product.stock=product.stock-c.quantity
+			product.save()
 		Cart.objects.filter(client=client).delete()
 		return redirect('/')
 	else:	

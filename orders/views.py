@@ -8,7 +8,10 @@ from deliverplaces.models import Deliverplace
 def makeorder(request):
 	if request.user.is_authenticated():
 		pk_deliverplace = request.POST.get('deliverplacedate')
+		celular = request.POST.get('celular')
 		client = Client.objects.get(userprofile = request.user)
+		client.phone = celular
+		client.save()
 		cart = Cart.objects.filter(client=client)
 		deliverplace = Deliverplace.objects.get(pk=pk_deliverplace)
 		amount = 0.0

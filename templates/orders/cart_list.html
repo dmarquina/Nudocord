@@ -55,16 +55,25 @@
 	<div class="medium-4 columns right">
 		<form action="{% url "orders:makeorder" %}" method="POST">
 		{% csrf_token %}
+			<h4>Datos de entrega</h4>
+			<hr class="hard">
+			<label>Celular:
+				{% if phone != 0 %}
+				<input type="number" name="celular" placeholder="Celular" min="0" max="9999999999" required="true" value="{{phone}}"></input>
+				{% else %}
+				<input type="number" name="celular" placeholder="Celular" min="0" max="9999999999" required="true"></input>
+				{% endif %}
+			</label>	
 			<label>Lugar:
 				<div class="combo">
-					<select class="combo_deliverplacename" id="combo_deliverplacename" name="deliverplacename">
+					<select class="combo_deliverplacename" id="combo_deliverplacename" name="deliverplacename" required="true">
 						<option value="" selected="selected">Lugar</option>
 					</select>
 				</div>
 			</label>
 			<label>Fecha y Hora:
 				<div class="combo">
-					<select class="combo_deliverplacedate" id="combo_deliverplacedate" name="deliverplacedate">
+					<select class="combo_deliverplacedate" id="combo_deliverplacedate" name="deliverplacedate" required="true">
 						<option value="" selected="selected">Fecha y Hora</option>
 					</select>
 				</div>

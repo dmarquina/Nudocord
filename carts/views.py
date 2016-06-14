@@ -55,4 +55,32 @@ def cartdetail(request):
 		'cart_quantity': cart_quantity,
 		'phone': phone,		
 		}
-		)
+	)
+
+def cartdelete(request,pk):
+	if request.user.is_authenticated():
+		Cart.objects.get(pk=pk).delete()
+		client = Client.objects.get(userprofile=request.user)
+		phone = client.phone
+		cart = Cart.objects.filter(client=client)
+		cart_quantity=0
+		for c in cart:
+			cart_quantity+=c.quantity
+	else:
+		cart_quantity = request.session.get('cart_quantity')
+		pk_products_cart = request.session.get('pk_products_cart')
+
+		cart_quantity=cart_quantity - pk_products_cart[str(pk)]
+		del pk_products_cart[str(pk)]
+		for pk_product , quantity in pk_products_cart.items():
+			product = get_object_or_404(Product, pk=int(pk_product))
+			subtotal_amount = product.price * quantity
+			cart.append(Cart(quantity=quantity,
+							subtotal_amount=subtotal_amount,
+							product=product))
+	return render(request, 'orders/cart_list.html',{
+		'cart': cart,
+		'cart_quantity': cart_quantity,
+		'phone': phone,		
+		}
+	)
